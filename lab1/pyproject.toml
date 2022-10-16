@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "lab1"
+version = "0.1.0"
+description = ""
+authors = ["FRANCESCO FIORELLA s303922 <s303922@studenti.polito.it>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.23.4"
+jupyter = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
