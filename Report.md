@@ -38,3 +38,9 @@ For each algorithm, a pair of number of elements "Ls" and the number of nodes is
 | 100  | -            | 173, 1603   | 214, 2163    |
 | 500  | -            | 1304, 10778 | 1489, 14368  |
 | 1000 | -            | 2893, 24238 | 3717, 255965 |
+
+## Reviews
+
+Link to my reviews:
+- https://github.com/FrancescoSorrentino/Computational-Intelligence---22-23/issues/2
+- https://github.com/simocosimo/computational-intelligence/issues/2

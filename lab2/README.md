@@ -14,16 +14,16 @@ Then, count the number of 1's of its binary representation.
 Random changes, Evaluation, Next generation
 
 <b>Cross-over</b><br>
-Given two sets of numbers merge them, removing the duplicates
+Given two sets of numbers, take half of the first one, and half of the second one or merge them, removing the duplicates
 
 <b>Mutation</b><br>
 Given a set of numbers, change one element of the set with one by the list of all numbers
 
-| N | Number of fitness function calls | Number of generations | Population size | Offspring size |
+| N | Weight | Number of generations | Population size | Offspring size |
 | :---: | :--: | :--: | :--: | :--:|
-| 5 | 9 | 3 | 10 | 3 |
-| 10 | 15 | 4 | 10 | 3 |
-| 20 | 29 | 5 | 10 | 5 |
-| 100 | 46 | 9 | 10 | 5 |
-| 500 | 82 | 16 | 10 | 5 |
-| 1000 | 116 | 23 | 10 | 5 |
+| 5 | 5 | 100 | 5 | 2 |
+| 10 | 12 | 100 | 10 | 3 |
+| 20 | 27 | 1000 | 20 | 10 |
+| 100 | 261 | 1000 | 20 | 10 |
+| 500 | 1796 | 1000 | 20 | 10 |
+| 1000 | 4018 | 5000 | 20 | 10 |
