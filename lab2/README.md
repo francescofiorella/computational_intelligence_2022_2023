@@ -21,9 +21,9 @@ Given a set of numbers, change one element of the set with one by the list of al
 
 | N | Weight | Number of generations | Population size | Offspring size |
 | :---: | :--: | :--: | :--: | :--:|
-| 5 | 5 | 100 | 5 | 2 |
+| 5 | 5 | 45/100 | 5 | 2 |
 | 10 | 12 | 100 | 10 | 3 |
 | 20 | 27 | 1000 | 20 | 10 |
 | 100 | 261 | 1000 | 20 | 10 |
 | 500 | 1796 | 1000 | 20 | 10 |
-| 1000 | 4018 | 5000 | 20 | 10 |
+| 1000 | 3953 | 5000 | 20 | 10 |
