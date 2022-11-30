@@ -73,3 +73,62 @@ When the first agent starts, the second one cannot win in any case.
 It is possible that in game number 2 the second agent wins; however it is highly unlikely, because all its (random) moves should have a nim sum equal to 0.
 
 ## An agent using evolved rules
+
+### The new strategies
+
+New strategies have been defined; they are based on feasible human moves and each of them can be executed with five variations, by removing either one, half, one-third, two-third or all the items in the chosen row.
+
+The strategies are:
+- shortest row
+- longest row
+- first row
+- last row
+- middle row
+
+### The evaluation
+
+#### First phase
+
+During the first phase of the evaluation, each strategy (with their variation) is used in a fixed number of matches against the random strategy. Each match is repeated twice, alternating the starting strategy.
+
+At the end, all the winning ratios are compared and a winner is decreed.
+
+#### Second phase
+
+The winning strategy is evaluated again: new matches are played all the other strategies. At the end the winning ratio is calculated; if it is high enough, then the strategy is the best possible (so far).
+
+### Results
+
+The next table shows the obtained results after the first evaluation phase. A Nim board with $N = 10$ was chosen, and 100 matches (repeated twice because of the different starter) were disputed for each strategy.
+
+|   Strategy   | Item number | Winning ratio |
+| :----------: | :---------: | :-----------: |
+| Shortest Row |     All     |     0.925     |
+| Shortest Row |      1      |     0.395     |
+| Shortest Row |    Half     |     0.35      |
+| Shortest Row |     1/3     |     0.405     |
+| Shortest Row |     2/3     |     0.585     |
+| Longest Row  |     All     |     0.435     |
+| Longest Row  |      1      |     0.49      |
+| Longest Row  |    Half     |     0.505     |
+| Longest Row  |     1/3     |     0.57      |
+| Longest Row  |     2/3     |     0.505     |
+|  First Row   |     All     |     0.67      |
+|  First Row   |      1      |     0.41      |
+|  First Row   |    Half     |     0.475     |
+|  First Row   |     1/3     |     0.495     |
+|  First Row   |     2/3     |     0.515     |
+|   Last Row   |     All     |     0.53      |
+|   Last Row   |      1      |     0.54      |
+|   Last Row   |    Half     |     0.495     |
+|   Last Row   |     1/3     |     0.475     |
+|   Last Row   |     2/3     |     0.54      |
+|  Middle Row  |     All     |     0.46      |
+|  Middle Row  |      1      |     0.505     |
+|  Middle Row  |    Half     |     0.435     |
+|  Middle Row  |     1/3     |     0.425     |
+|  Middle Row  |     2/3     |     0.545     |
+
+The winning strategy is removing all the items from the shortest row, with a very high winning ratio of 0.925 (92.5% of games won).
+
+After the second evaluation phase, this strategy was confirmed as the best one with an overall winning ratio of 0.9.
