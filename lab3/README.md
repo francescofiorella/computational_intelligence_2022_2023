@@ -6,7 +6,7 @@ The following lab develops some agents able to play Nim, with an arbitrary numbe
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Nim):
 
-Nim is a mathematical game of strategy in which two players take turns removing (or "nimming") objects from distinct heaps or piles. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap or pile. The goal of the game is to avoid taking the last object.
+Nim is a mathematical game of strategy in which two players take turns removing (or "nimming") objects from distinct heaps or piles. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap or pile. The goal of the game is to to take the last objec.
 
 ## The nim sum
 
@@ -25,6 +25,8 @@ Here's how to do it:
     - Note that if the configuration you are given has a nim sum not equal to 0, there always is a move that creates a new configuration with a nim sum of 0. However, there are usually also moves that will yield configurations that give nim sums not equal to 0, and you need to avoid making these.
     - Also note that if you are given a configuration that has a nim sum of 0, there is no move that will create a configuration that also has a nim sum of 0.
 
+In this implementation, the nim sum is calculated as the bitwise xor of the rows.
+
 ### The hardcoded opponent: a random strategy
 
 The hardcoded opponent uses a random strategy by default: it consists in removing a random number of sticks from a random row, if the row has at least one stick.
@@ -39,28 +41,29 @@ Calculate the nim_sum of the current board:
 
 ## The actual game: 
 
-The play_nim function takes three parameters:
+The play_nim function takes four parameters:
 - `n` indicates the number of rows on the board.
-- `opponent_strategy` indicates the method used by the opponent to make a move.
-- `who_starts` indicates who makes the first move; it is an odd number (tipically 1) to indicate the user and an even number (tipically 0) to indicate the opponent.
+- `first_strategy` indicates the method used by the first agent to make a move.
+- `second_strategy` indicates the method used by the second agent to make a move.
+- `who_starts` indicates who makes the first move; it is an even number (tipically 0) to indicate the first agent and an odd number (tipically 1) to indicate the second agent.
 
 The game was played in three version:
-- In the first one the opponent uses the random strategy.
-- In the second one the opponent uses the nim sum strategy.
-- In the third one, the opponent uses the nim sum strategy with a 70% prpbability, random otherwise.
-In all the versions, the user uses the nim sum strategy; moreover, each version was executed two times, alternating the user and the opponent as the first player to make a move.
+- In the first one the second agent uses the random strategy.
+- In the second one the second agent uses the nim sum strategy.
+- In the third one, the second agent uses the not so smart strategy, which exploits the nim sum strategy with a 70% probability, random otherwise.
+In all the versions, the first agent uses the nim sum strategy; moreover, each version was executed two times, alternating the first and the second agent as the first player to make a move.
 
 ## Results
 
-| Game number | Number of rows | User's strategy | Opponent's strategy | Starter  |    Winner     |
-| :---------: | :------------: | :-------------: | :-----------------: | :------: | :-----------: |
-|      1      |       5        |     Nim Sum     |       Random        |   User   |     User      |
-|      2      |       5        |     Nim Sum     |       Random        | Opponent |     User      |
-|      3      |       5        |     Nim Sum     |       Nim Sum       |   User   |     User      |
-|      4      |       5        |     Nim Sum     |       Nim Sum       | Opponent |   Opponent    |
-|      5      |       5        |     Nim Sum     |    Nim Sum (70%)    |   User   |     User      |
-|      6      |       5        |     Nim Sum     |    Nim Sum (70%)    | Opponent | User (mostly) |
+| Game number | Number of rows | First agent's strategy | Second agent's strategy |   Starter    |        Winner        |
+| :---------: | :------------: | :--------------------: | :---------------------: | :----------: | :------------------: |
+|      1      |       5        |        Nim Sum         |         Random          | First agent  |     First agent      |
+|      2      |       5        |        Nim Sum         |         Random          | Second agent |     First agent      |
+|      3      |       5        |        Nim Sum         |         Nim Sum         | First agent  |     First agent      |
+|      4      |       5        |        Nim Sum         |         Nim Sum         | Second agent |     Second agent     |
+|      5      |       5        |        Nim Sum         |      Not So Smart       | First agent  |     First agent      |
+|      6      |       5        |        Nim Sum         |      Not So Smart       | Second agent | First agent (mostly) |
 
-When the user starts, the opponent cannot win in any case.
+When the first agent starts, the second one cannot win in any case.
 
-It is possible that in game number 2 the opponent wins; however it is highly unlikely, because all its (random) moves should have a nim sum equal to 0.
+It is possible that in game number 2 the second agent wins; however it is highly unlikely, because all its (random) moves should have a nim sum equal to 0.
