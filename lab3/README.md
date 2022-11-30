@@ -45,11 +45,12 @@ This strategy emulates an human (that can make errors), and consists in using th
 
 ## The match: 
 
-The play_nim function takes four parameters:
+The play_nim function takes some parameters:
 - `n` indicates the number of rows on the board.
 - `first_strategy` indicates the method used by the first agent to make a move.
 - `second_strategy` indicates the method used by the second agent to make a move.
 - `who_starts` indicates who makes the first move; it is an even number (tipically 0) to indicate the first agent and an odd number (tipically 1) to indicate the second agent.
+- `first_num_law` and `second_num_law` are two special parameters that will be used for the evolved rules.
 
 The game was played in three version:
 - In the first one the second agent uses the random strategy.
