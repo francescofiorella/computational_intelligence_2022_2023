@@ -8,7 +8,7 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Nim):
 
 Nim is a mathematical game of strategy in which two players take turns removing (or "nimming") objects from distinct heaps or piles. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap or pile. The goal of the game is to to take the last objec.
 
-## The nim sum
+### The nim sum
 
 From [Unicatt](https://dmf.unicatt.it/~paolini/divulgazione/mateappl/nim/nim.html):
 
@@ -27,19 +27,23 @@ Here's how to do it:
 
 In this implementation, the nim sum is calculated as the bitwise xor of the rows.
 
-### The hardcoded opponent: a random strategy
+## An agent using fixed rules
 
-The hardcoded opponent uses a random strategy by default: it consists in removing a random number of sticks from a random row, if the row has at least one stick.
+### The random strategy
 
-During the game the opponent can also use the nim sum strategy.
+The hardcoded agent can use a set of fixed strategies: the first one consists in removing a random number of sticks from a random row, if the row has one or more sticks.
 
 ### The nim sum strategy
 
-Calculate the nim_sum of the current board:
-- if it is not zero, evaluate some random moves until a zero nim_sum is found.
+The second strategy consists in calculating the nim sum of the current board:
+- if it is not zero, evaluate some random moves until a zero nim sum is found.
 - if it is zero, perform a random move.
 
-## The actual game: 
+### The not so smart strategy
+
+This strategy emulates an human (that can make errors), and consists in using the nim sum strategy with a 70% probability (by default) or the random strategy otherwise.
+
+## The match: 
 
 The play_nim function takes four parameters:
 - `n` indicates the number of rows on the board.
@@ -50,10 +54,10 @@ The play_nim function takes four parameters:
 The game was played in three version:
 - In the first one the second agent uses the random strategy.
 - In the second one the second agent uses the nim sum strategy.
-- In the third one, the second agent uses the not so smart strategy, which exploits the nim sum strategy with a 70% probability, random otherwise.
+- In the third one, the second agent uses the not so smart strategy.
 In all the versions, the first agent uses the nim sum strategy; moreover, each version was executed two times, alternating the first and the second agent as the first player to make a move.
 
-## Results
+### Results
 
 | Game number | Number of rows | First agent's strategy | Second agent's strategy |   Starter    |        Winner        |
 | :---------: | :------------: | :--------------------: | :---------------------: | :----------: | :------------------: |
@@ -67,3 +71,5 @@ In all the versions, the first agent uses the nim sum strategy; moreover, each v
 When the first agent starts, the second one cannot win in any case.
 
 It is possible that in game number 2 the second agent wins; however it is highly unlikely, because all its (random) moves should have a nim sum equal to 0.
+
+## An agent using evolved rules
