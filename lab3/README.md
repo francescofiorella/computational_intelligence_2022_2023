@@ -86,15 +86,19 @@ The strategies are:
 - last row
 - middle row
 
-### The evaluation
+### The population and the individual
+The population is formed by all the possible rules, an individual is a single rule with a certain "num_law".
 
-#### First phase
+### Fitness
+The fitness is obtained by calculated the winning ratio of that individual.
 
-During the first phase of the evaluation, each strategy (with their variation) is used in a fixed number of matches against the random strategy. Each match is repeated twice, alternating the starting strategy.
+### The rule-finding phase
+
+During the rule-finding phase, each strategy (with their variation) is used in a fixed number of matches against the random strategy. Each match is repeated twice, alternating the starting strategy.
 
 At the end, all the winning ratios are compared and a winner is decreed.
 
-#### Second phase
+### Evaluation phase
 
 The winning strategy is evaluated again: new matches are played all the other strategies. At the end the winning ratio is calculated; if it is high enough, then the strategy is the best possible (so far).
 
