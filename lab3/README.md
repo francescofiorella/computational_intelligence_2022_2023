@@ -43,7 +43,7 @@ The second strategy consists in calculating the nim sum of the current board:
 
 This strategy emulates an human (that can make errors), and consists in using the nim sum strategy with a 70% probability (by default) or the random strategy otherwise.
 
-## The match: 
+## The match
 
 The play_nim function takes some parameters:
 - `n` indicates the number of rows on the board.
@@ -136,4 +136,41 @@ The next table shows the obtained results after the first evaluation phase. A Ni
 
 The winning strategy is removing all the items from the shortest row, with a very high winning ratio of 0.925 (92.5% of games won).
 
-After the second evaluation phase, this strategy was confirmed as the best one with an overall winning ratio of 0.9.
+After the evaluation phase, this strategy was confirmed as the best one with an overall winning ratio of 0.9.
+
+## An agent using minmax
+
+The minmax strategy works as follow:
+
+I am maximizing my possible reward.<br>
+My opponent is minimizing my possible reward (so maximizing his reward).
+
+When it's my turn:
+- Calculate all the possible moves.
+- Calculate all the possible moved for my opponent (for each of my moves)
+- Keep on calculating, until all the possible combinations end in someone winning.
+- Alpha beta pruning was included in the implementation.
+- Pick the path that maximize my reward.
+
+### The matches
+
+Several matches were played, to evaluate this strategy:
+- Against the random strategy
+- Against the evolved strategy (Shortest Row [All item])
+- Against nim sum
+
+### Results
+
+The minmax strategy was able to win against all the previous strategy; however, it loses against nim sum when the minmax is not starting.
+
+Despite the alpha beta pruning was implemented along with a depth cut, the minmax strategy was too slow to calculate the optimal move for $N > 3$, so all the matches were played with $N = 3$.
+
+The results table is reported below:
+
+|   N   |     Opponent Strategy      | Winning Ratio |
+| :---: | :------------------------: | :-----------: |
+|   3   |           Random           |      1.0      |
+|   3   |          Evolved           |      1.0      |
+|   3   | Nim Sum (as second player) |      1.0      |
+|   3   | Nim Sum (as first player)  |      0.0      |
+|   4   |             -              |       -       |
