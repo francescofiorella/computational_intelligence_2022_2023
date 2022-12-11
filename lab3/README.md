@@ -174,3 +174,30 @@ The results table is reported below:
 |   3   | Nim Sum (as second player) |      1.0      |
 |   3   | Nim Sum (as first player)  |      0.0      |
 |   4   |             -              |       -       |
+
+## An agent using reinforcement learning
+
+### The reward
+
+The agents gets a 1 reward if the move he does is the winning one (the last move of the game), 0 otherwise.
+
+### The learning phase
+
+During the learning phase, the agent is trained against the random strategy. 10000 matches are performed and, at the end, the agent improves significantly.
+
+### The opponents
+
+The reinforcement learning algorithm has been trained against:
+- Random strategy
+- Evolved strategy
+- Nim sum strategy
+
+### The results
+
+The learning algorithm has been revealed successful; each of the opponent has been, in th end, beaten with a high rate. Data has been collected before and after the training, the starting player is meaningful, in fact rl has a winning rate of 0.0 if he's not starting (0.8 against the random strategy).
+
+|   N   | Opponent's strategy | First evaluation | Second evaluation |
+| :---: | :-----------------: | :--------------: | :---------------: |
+|   5   |       Random        |       0.47       |       0.89        |
+|   5   |       Evolved       |       0.0        |        1.0        |
+|   5   |       Nim Sum       |       0.0        |       0.83        |
