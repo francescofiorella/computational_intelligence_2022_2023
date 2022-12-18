@@ -6,7 +6,7 @@ The following lab develops some agents able to play Nim, with an arbitrary numbe
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Nim):
 
-Nim is a mathematical game of strategy in which two players take turns removing (or "nimming") objects from distinct heaps or piles. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap or pile. The goal of the game is to to take the last objec.
+Nim is a mathematical game of strategy in which two players take turns removing (or "nimming") objects from distinct heaps or piles. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap or pile. The goal of the game is to take the last object.
 
 ### The nim sum
 
@@ -100,7 +100,7 @@ At the end, all the winning ratios are compared and a winner is decreed.
 
 ### Evaluation phase
 
-The winning strategy is evaluated again: new matches are played all the other strategies. At the end the winning ratio is calculated; if it is high enough, then the strategy is the best possible (so far).
+The winning strategy is evaluated again: new matches are played against all the other strategies. At the end the winning ratio is calculated; if it is high enough, then the strategy is the best possible (so far).
 
 ### Results
 
@@ -194,7 +194,9 @@ The reinforcement learning algorithm has been trained against:
 
 ### The results
 
-The learning algorithm has been revealed successful; each of the opponent has been, in th end, beaten with a high rate. Data has been collected before and after the training, the starting player is meaningful, in fact rl has a winning rate of 0.0 if he's not starting (0.8 against the random strategy).
+The learning algorithm has revealed successful; in the end, each opponent has been beaten with a high ratio.<br>
+Data has been collected before and after the training, during two evaluations which showed the great improvement of the agent during the learning phase.<br>
+The order in which players start is meaningful, in fact the reinforcement learning agent has a winning ratio of 0.0 (against the evolved and the nim sum strategy) if he's not the one who's starting; the ratio is still high (0.8) against the random strategy.
 
 |   N   | Opponent's strategy | First evaluation | Second evaluation |
 | :---: | :-----------------: | :--------------: | :---------------: |
