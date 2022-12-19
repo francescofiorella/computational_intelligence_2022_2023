@@ -163,7 +163,7 @@ Several matches were played, to evaluate this strategy:
 
 The minmax strategy was able to win against all the previous strategy; however, it loses against nim sum when the minmax is not starting.
 
-Despite the alpha beta pruning was implemented along with a depth cut, the minmax strategy was too slow to calculate the optimal move for $N > 3$, so all the matches were played with $N = 3$.
+Despite the alpha beta pruning was implemented along with a depth cut, the minmax strategy was too slow to calculate the optimal move for $N > 3$, so all the matches were played with $N = 3$ (After some modifications, I was able to do some matches with $N = 4$, the results are reported below).
 
 The results table is reported below:
 
@@ -209,3 +209,18 @@ The order in which players start is meaningful, in fact the reinforcement learni
 After the reviews, I made some little modifications to improve the results:
 - The alpha beta pruning in the minmax strategy was modifyed a little bit.
 - The maximum depth in the minmax strategy was setted to 10.
+
+More matches were played with $N = 4$; howver, since the computation is slow, the winning ratio was calculated on 10 matches for each opponent strategy.
+
+The following table shows the new results.
+
+|   N   |     Opponent Strategy      | Winning Ratio |
+| :---: | :------------------------: | :-----------: |
+|   4   |           Random           |      1.0      |
+|   4   |          Evolved           |      1.0      |
+|   4   | Nim Sum (as second player) |      0.0      |
+|   4   | Nim Sum (as first player)  |      0.7      |
+
+Since the nim sum of a full board with $N = 4$ is equal to 0, it's not possible to win against the nim sum strategy as second player.
+
+On the other hand, the winning ratio against the nim sum strategy as first player is quite variable. It is due to the limited maximum depth: the minmax can't always calculate the optimal move, and the resulting ratios were: 0.3, 1.0, 0.7, etc...
