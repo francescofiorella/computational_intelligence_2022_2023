@@ -210,7 +210,7 @@ After the reviews, I made some little modifications to improve the results:
 - The alpha beta pruning in the minmax strategy was modifyed a little bit.
 - The maximum depth in the minmax strategy was setted to 10.
 
-More matches were played with $N = 4$; howver, since the computation is slow, the winning ratio was calculated on 10 matches for each opponent strategy.
+More matches were played with $N = 4$; however, since the computation is slow, the winning ratio was calculated on 10 matches (instead of 100) for each opponent strategy.
 
 The following table shows the new results.
 
@@ -223,4 +223,4 @@ The following table shows the new results.
 
 Since the nim sum of a full board with $N = 4$ is equal to 0, it's not possible to win against the nim sum strategy as second player.
 
-On the other hand, the winning ratio against the nim sum strategy as first player is quite variable. It is due to the limited maximum depth: the minmax can't always calculate the optimal move, and the resulting ratios were: 0.3, 1.0, 0.7, etc...
+On the other hand, the winning ratio against the nim sum strategy as first player is quite variable. It is due to the limited maximum depth: the minmax can't always calculate the optimal move, and the resulting ratios were 0.3, 1.0, 0.7, etc...
