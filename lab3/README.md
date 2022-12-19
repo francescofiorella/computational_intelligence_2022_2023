@@ -203,3 +203,9 @@ The order in which players start is meaningful, in fact the reinforcement learni
 |   5   |       Random        |       0.47       |       0.89        |
 |   5   |       Evolved       |       0.0        |        1.0        |
 |   5   |       Nim Sum       |       0.0        |       0.83        |
+
+## Later modifications
+
+After the reviews, I made some little modifications to improve the results:
+- The alpha beta pruning in the minmax strategy was modifyed a little bit.
+- The maximum depth in the minmax strategy was setted to 10.
