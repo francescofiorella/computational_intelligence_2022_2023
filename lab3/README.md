@@ -2,7 +2,7 @@
 
 The following lab develops some agents able to play Nim, with an arbitrary number of rows and an upper bound on the number of objects that can be removed in a turn (a.k.a., subtraction game).
 
-## The game
+## The Nim game
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Nim):
 
@@ -25,7 +25,7 @@ Here's how to do it:
     - Note that if the configuration you are given has a nim sum not equal to 0, there always is a move that creates a new configuration with a nim sum of 0. However, there are usually also moves that will yield configurations that give nim sums not equal to 0, and you need to avoid making these.
     - Also note that if you are given a configuration that has a nim sum of 0, there is no move that will create a configuration that also has a nim sum of 0.
 
-In this implementation, the nim sum is calculated as the bitwise xor of the rows.
+> In this implementation, the nim sum is calculated as the bitwise xor of the rows.
 
 ## An agent using fixed rules
 
@@ -45,7 +45,7 @@ This strategy emulates an human (that can make errors), and consists in using th
 
 ## The match
 
-The play_nim function takes some parameters:
+The `play_nim` function takes some parameters:
 - `n` indicates the number of rows on the board.
 - `first_strategy` indicates the method used by the first agent to make a move.
 - `second_strategy` indicates the method used by the second agent to make a move.
@@ -75,7 +75,7 @@ It is possible that in game number 2 the second agent wins; however it is highly
 
 ### Some human-like strategies
 
-New strategies have been defined; they are based on feasible human moves and each of them can be executed with five variations, by removing either one, half, one-third, two-third or all the items in the chosen row.
+New strategies have been defined: they are based on feasible human moves and each of them can be executed with five variations, by removing either one, half, one-third, two-third or all the sticks in the chosen row.
 
 The strategies are:
 - shortest row
@@ -92,11 +92,11 @@ At the end, all the winning ratios are compared and a winner is decreed.
 
 ### Evaluation phase
 
-The winning strategy is evaluated again: new matches are played all the other strategies. At the end the winning ratio is calculated; if it is high enough, then the strategy is the best possible (so far).
+The winning strategy is evaluated again: new matches are played against all the other strategies. At the end, the winning ratio is calculated; if it is high enough, then the strategy is the best possible (so far).
 
 ### Results
 
-The next table shows the obtained results after the turnament. A Nim board with $N = 5$ was chosen, and 100 matches (repeated twice because of the different starter) were disputed for each strategy.
+The next table shows the obtained results after the tournament. A Nim board with $N = 5$ was chosen, and 100 matches (repeated twice because of the different starter) were disputed for each strategy.
 
 |   Strategy   | Item number | Winning ratio |
 | :----------: | :---------: | :-----------: |
@@ -126,7 +126,7 @@ The next table shows the obtained results after the turnament. A Nim board with 
 |  Middle Row  |     1/3     |     0.425     |
 |  Middle Row  |     2/3     |     0.545     |
 
-The winning strategy is removing all the items from the shortest row, with a very high winning ratio of 0.849 (84.9% of games won).
+The winning strategy is removing all the sticks from the shortest row, with a winning ratio of 0.849 (84.9% of games won). It represents the best human-like strategy.
 
 After the evaluation phase, this strategy was confirmed as the best one with an overall winning ratio of 0.9.
 
@@ -194,7 +194,8 @@ When it's my turn:
 
 Several matches were played, to evaluate this strategy:
 - Against the random strategy
-- Against the evolved strategy (Shortest Row [All item])
+- Against the best human-like strategy (Shortest Row [All item])
+- Against the evolved strategy
 - Against nim sum
 
 ### Results
@@ -241,6 +242,7 @@ During the learning phase, the agent is trained against the random strategy. 100
 
 The reinforcement learning algorithm has been trained against:
 - Random strategy
+- Best human-like strategy
 - Evolved strategy
 - Nim sum strategy
 
