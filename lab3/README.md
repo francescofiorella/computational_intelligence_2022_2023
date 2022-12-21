@@ -163,7 +163,7 @@ After 500 generations, the algorithm found that the best strategy is composed by
 - Shortest row, by removing one-third of the items from the board
 - Longest row, by removing one item from the board
 
-Moreover, some matches against the random and the best human-like strategies were played: the results are reported in the table below.
+Moreover, some matches against the random and the best human-like strategies were played to further evaluate the evolved strategy: the results are reported in the table below.
 
 |   N   | Opponent's Strategy | Win Ratio |
 | :---: | :-----------------: | :-------: |
@@ -180,21 +180,21 @@ Moreover, some matches against the random and the best human-like strategies wer
 
 The minmax strategy works as follow:
 
-I am maximizing my possible reward.<br>
-My opponent is minimizing my possible reward (so maximizing his reward).
+I am maximizing my possible reward, while my opponent is minimizing my possible reward (so maximizing his reward).
 
 When it's my turn:
 - Calculate all the possible moves.
-- Calculate all the possible moved for my opponent (for each of my moves)
+- Calculate all the possible moves for my opponent (for each of my moves)
 - Keep on calculating, until all the possible combinations end in someone winning.
-- Alpha beta pruning was included in the implementation.
+  - Alpha beta pruning was included in the implementation, along with depth limitation.
 - Pick the path that maximize my reward.
+- Perform the chosen move.
 
 ### The matches
 
-Several matches were played, to evaluate this strategy:
+Several matches were played to evaluate the minmax strategy:
 - Against the random strategy
-- Against the best human-like strategy (Shortest Row [All item])
+- Against the best human-like strategy
 - Against the evolved strategy
 - Against nim sum
 
@@ -232,7 +232,7 @@ The results are reported in the table below:
 
 ### The reward
 
-The agents gets a 1 reward if the move he does is the winning one (the last move of the game), 0 otherwise.
+The agents gets a reward of 1 if the move he does is the winning one (the last move of the game), 0 otherwise.
 
 ### The learning phase
 
@@ -250,7 +250,7 @@ The reinforcement learning algorithm has been trained against:
 
 The learning algorithm has revealed successful; in the end, each opponent has been beaten with a high ratio.<br>
 Data has been collected before and after the training, during two evaluations which showed the great improvement of the agent during the learning phase.<br>
-The order in which players start is meaningful, in fact the reinforcement learning agent has a winning ratio of 0.0 (against the evolved and the nim sum strategy) if he's not the one who's starting; the ratio is still high (0.8) against the random strategy.
+The order in which players start is meaningful, in fact the reinforcement learning agent has a winning ratio of 0.0 (against the evolved and the nim sum strategy) if he's not the one who's starting; the ratio is still high (0.7) against the random strategy.
 
 |   N   | Opponent's strategy | First evaluation | Second evaluation |
 | :---: | :-----------------: | :--------------: | :---------------: |
@@ -262,8 +262,8 @@ The order in which players start is meaningful, in fact the reinforcement learni
 ## Later modifications
 
 After the reviews, I made some little modifications to improve the results:
-- A wrapper function to evaluate each strategy has been written.
-- The previous implementation of the evolved strategy was modified and adapted as a turnament, and now it is included in the first task.
+- A wrapper function has been written to evaluate each strategy.
+- The previous implementation of the evolved strategy was modified and adapted as a tournament, and now it is included in the first task.
 - A new evolved strategy was implemented from scratch.
 - The alpha beta pruning in the minmax strategy was modified and improved.
 - The maximum depth in the minmax strategy was setted to 10.
