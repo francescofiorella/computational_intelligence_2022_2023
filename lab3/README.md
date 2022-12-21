@@ -98,33 +98,33 @@ The winning strategy is evaluated again: new matches are played against all the 
 
 The next table shows the obtained results after the tournament. A Nim board with $N = 5$ was chosen, and 100 matches (repeated twice because of the different starter) were disputed for each strategy.
 
-|   Strategy   | Item number | Winning ratio |
-| :----------: | :---------: | :-----------: |
-| Shortest Row |     All     |     0.849     |
-| Shortest Row |      1      |     0.395     |
-| Shortest Row |    Half     |     0.35      |
-| Shortest Row |     1/3     |     0.405     |
-| Shortest Row |     2/3     |     0.585     |
-| Longest Row  |     All     |     0.435     |
-| Longest Row  |      1      |     0.49      |
-| Longest Row  |    Half     |     0.505     |
-| Longest Row  |     1/3     |     0.57      |
-| Longest Row  |     2/3     |     0.505     |
-|  First Row   |     All     |     0.67      |
-|  First Row   |      1      |     0.41      |
-|  First Row   |    Half     |     0.475     |
-|  First Row   |     1/3     |     0.495     |
-|  First Row   |     2/3     |     0.515     |
-|   Last Row   |     All     |     0.53      |
-|   Last Row   |      1      |     0.54      |
-|   Last Row   |    Half     |     0.495     |
-|   Last Row   |     1/3     |     0.475     |
-|   Last Row   |     2/3     |     0.54      |
-|  Middle Row  |     All     |     0.46      |
-|  Middle Row  |      1      |     0.505     |
-|  Middle Row  |    Half     |     0.435     |
-|  Middle Row  |     1/3     |     0.425     |
-|  Middle Row  |     2/3     |     0.545     |
+|   Strategy   | Stick number | Winning ratio |
+| :----------: | :----------: | :-----------: |
+| Shortest Row |     All      |     0.849     |
+| Shortest Row |      1       |     0.395     |
+| Shortest Row |     Half     |     0.35      |
+| Shortest Row |     1/3      |     0.405     |
+| Shortest Row |     2/3      |     0.585     |
+| Longest Row  |     All      |     0.435     |
+| Longest Row  |      1       |     0.49      |
+| Longest Row  |     Half     |     0.505     |
+| Longest Row  |     1/3      |     0.57      |
+| Longest Row  |     2/3      |     0.505     |
+|  First Row   |     All      |     0.67      |
+|  First Row   |      1       |     0.41      |
+|  First Row   |     Half     |     0.475     |
+|  First Row   |     1/3      |     0.495     |
+|  First Row   |     2/3      |     0.515     |
+|   Last Row   |     All      |     0.53      |
+|   Last Row   |      1       |     0.54      |
+|   Last Row   |     Half     |     0.495     |
+|   Last Row   |     1/3      |     0.475     |
+|   Last Row   |     2/3      |     0.54      |
+|  Middle Row  |     All      |     0.46      |
+|  Middle Row  |      1       |     0.505     |
+|  Middle Row  |     Half     |     0.435     |
+|  Middle Row  |     1/3      |     0.425     |
+|  Middle Row  |     2/3      |     0.545     |
 
 The winning strategy is removing all the sticks from the shortest row, with a winning ratio of 0.849 (84.9% of games won). It represents the best human-like strategy.
 
@@ -158,10 +158,10 @@ As we said, each gene represents a rule:
 ### Results
 
 After 500 generations, the algorithm found that the best strategy is composed by the following rules:
-- Shortest row, by removing all the items from the board
-- Shortest row, by removing all the items from the board
-- Shortest row, by removing one-third of the items from the board
-- Longest row, by removing one item from the board
+- Shortest row, by removing all the sticks from the board
+- Shortest row, by removing all the sticks from the board
+- Shortest row, by removing one-third of the sticks from the board
+- Longest row, by removing one stick from the board
 
 Moreover, some matches against the random and the best human-like strategies were played to further evaluate the evolved strategy: the results are reported in the table below.
 
