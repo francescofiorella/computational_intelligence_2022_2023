@@ -73,9 +73,7 @@ When the first agent starts, the second one cannot win in any case.
 
 It is possible that in game number 2 the second agent wins; however it is highly unlikely, because all its (random) moves should have a nim sum equal to 0.
 
-## An agent using evolved rules
-
-### The new strategies
+### Some human-like strategies
 
 New strategies have been defined; they are based on feasible human moves and each of them can be executed with five variations, by removing either one, half, one-third, two-third or all the items in the chosen row.
 
@@ -86,29 +84,23 @@ The strategies are:
 - last row
 - middle row
 
-### The population and the individual
-The population is formed by all the possible rules, an individual is a single rule with a certain "num_law".
+### The tournament
 
-### Fitness
-The fitness is obtained by calculated the winning ratio of that individual.
-
-### The rule-finding phase
-
-During the rule-finding phase, each strategy (with their variation) is used in a fixed number of matches against the random strategy. Each match is repeated twice, alternating the starting strategy.
+During the tournament, each strategy (with their variation) is used in a fixed number of matches against the random strategy. Each match is repeated twice, alternating the starting strategy.
 
 At the end, all the winning ratios are compared and a winner is decreed.
 
 ### Evaluation phase
 
-The winning strategy is evaluated again: new matches are played against all the other strategies. At the end the winning ratio is calculated; if it is high enough, then the strategy is the best possible (so far).
+The winning strategy is evaluated again: new matches are played all the other strategies. At the end the winning ratio is calculated; if it is high enough, then the strategy is the best possible (so far).
 
 ### Results
 
-The next table shows the obtained results after the first evaluation phase. A Nim board with $N = 10$ was chosen, and 100 matches (repeated twice because of the different starter) were disputed for each strategy.
+The next table shows the obtained results after the turnament. A Nim board with $N = 5$ was chosen, and 100 matches (repeated twice because of the different starter) were disputed for each strategy.
 
 |   Strategy   | Item number | Winning ratio |
 | :----------: | :---------: | :-----------: |
-| Shortest Row |     All     |     0.925     |
+| Shortest Row |     All     |     0.849     |
 | Shortest Row |      1      |     0.395     |
 | Shortest Row |    Half     |     0.35      |
 | Shortest Row |     1/3     |     0.405     |
@@ -134,9 +126,55 @@ The next table shows the obtained results after the first evaluation phase. A Ni
 |  Middle Row  |     1/3     |     0.425     |
 |  Middle Row  |     2/3     |     0.545     |
 
-The winning strategy is removing all the items from the shortest row, with a very high winning ratio of 0.925 (92.5% of games won).
+The winning strategy is removing all the items from the shortest row, with a very high winning ratio of 0.849 (84.9% of games won).
 
 After the evaluation phase, this strategy was confirmed as the best one with an overall winning ratio of 0.9.
+
+## An agent using evolved rules
+
+#### Individual
+An individual is formed by a set of four genes, each gene contains the strategy to use in a certain phase of the game.
+
+#### Gene
+A gene is formed by a tuple of `(rule, law)`, previously defined in the human-like strategies.
+
+#### Fitness
+The fitness is obtained by summing the winning ratio of the individual against the random strategy and the best human strategy, using boards with 2, 3, 4, and 5 rows.
+
+#### Cross-over
+Given two individual, merge them by taking a random $num$ of genes of the first one and $NUM\_ROWS - num$ genes of the second one.
+
+#### Mutation
+Replace a random gene of the individual with another random gene.
+
+### The evolved strategy
+The evolved strategy exploits the four genes of the individual.<br>
+As we said, each gene represents a rule:
+- The first rule is used if the board contains less then a quarter of the total sticks.
+- The second rule is used if the board contains between a quarter and half of the total sticks.
+- the third rule is used if the board contains between half and three-quarters of the total sticks.
+- the fourth rule is used if the board contains more then three-quarters of the total sticks.
+
+### Results
+
+After 500 generations, the algorithm found that the best strategy is composed by the following rules:
+- Shortest row, by removing all the items from the board
+- Shortest row, by removing all the items from the board
+- Shortest row, by removing one-third of the items from the board
+- Longest row, by removing one item from the board
+
+Moreover, some matches against the random and the best human-like strategies were played: the results are reported in the table below.
+
+|   N   | Opponent's Strategy | Win Ratio |
+| :---: | :-----------------: | :-------: |
+|   2   |       Random        |   0.54    |
+|   3   |       Random        |   0.68    |
+|   4   |       Random        |   0.82    |
+|   5   |       Random        |   0.71    |
+|   2   |     Best human      |    0.5    |
+|   3   |     Best human      |    1.0    |
+|   4   |     Best human      |    1.0    |
+|   5   |     Best human      |    1.0    |
 
 ## An agent using minmax
 
@@ -161,19 +199,33 @@ Several matches were played, to evaluate this strategy:
 
 ### Results
 
-The minmax strategy was able to win against all the previous strategy; however, it loses against nim sum when the minmax is not starting.
+The minmax strategy was able to win against all the previous strategy; however, when playing against the nim sum, it loses if the minmax is not starting with $N \ in \ [2, 3], and it loses when the minmax is starting with $N = 4$.
 
-Despite the alpha beta pruning was implemented along with a depth cut, the minmax strategy was too slow to calculate the optimal move for $N > 3$, so all the matches were played with $N = 3$ (After some modifications, I was able to do some matches with $N = 4$, the results are reported below).
+Despite the alpha beta pruning was implemented along with a depth cut, the minmax strategy was too slow to calculate the optimal move for $N > 4$, so all the matches were played with $N \ in \ [2, 3, 4]$. Moreover, since the computation was slow, the number of matches in the evaluation was lowered from 100 to 10 for $N = 4$.
 
-The results table is reported below:
+It is not possible to win against the nim sum strategy as first player for $N \ in \ [2, 3]$.
 
-|   N   |     Opponent Strategy      | Winning Ratio |
+Considering $N = 4$, since the nim sum of a full board is equal to 0, it's not possible to win against the nim sum strategy as second player. On the other hand, the winning ratio against the nim sum strategy as first player is quite variable. It is due to the limited maximum depth: the minmax can't always calculate the optimal move, and the resulting ratios were 0.3, 1.0, 0.7, etc...
+
+The results are reported in the table below:
+
+|   N   |    Opponent's Strategy     | Winning Ratio |
 | :---: | :------------------------: | :-----------: |
+|   2   |           Random           |     0.88      |
 |   3   |           Random           |      1.0      |
+|   4   |           Random           |      1.0      |
+|   2   |         Best human         |      1.0      |
+|   3   |         Best human         |      1.0      |
+|   4   |         Best human         |      1.0      |
+|   2   |          Evolved           |      1.0      |
 |   3   |          Evolved           |      1.0      |
+|   4   |          Evolved           |      1.0      |
+|   2   | Nim Sum (as second player) |      1.0      |
 |   3   | Nim Sum (as second player) |      1.0      |
+|   4   | Nim Sum (as second player) |      0.0      |
+|   2   | Nim Sum (as first player)  |      0.0      |
 |   3   | Nim Sum (as first player)  |      0.0      |
-|   4   |             -              |       -       |
+|   4   | Nim Sum (as first player)  |      0.7      |
 
 ## An agent using reinforcement learning
 
@@ -200,27 +252,17 @@ The order in which players start is meaningful, in fact the reinforcement learni
 
 |   N   | Opponent's strategy | First evaluation | Second evaluation |
 | :---: | :-----------------: | :--------------: | :---------------: |
-|   5   |       Random        |       0.47       |       0.89        |
-|   5   |       Evolved       |       0.0        |        1.0        |
-|   5   |       Nim Sum       |       0.0        |       0.83        |
+|   5   |       Random        |       0.43       |       0.89        |
+|   5   |     Best human      |       0.16       |        1.0        |
+|   5   |       Evolved       |       0.08       |        1.0        |
+|   5   |       Nim Sum       |       0.0        |       0.84        |
 
 ## Later modifications
 
 After the reviews, I made some little modifications to improve the results:
-- The alpha beta pruning in the minmax strategy was modifyed a little bit.
+- A wrapper function to evaluate each strategy has been written.
+- The previous implementation of the evolved strategy was modified and adapted as a turnament, and now it is included in the first task.
+- A new evolved strategy was implemented from scratch.
+- The alpha beta pruning in the minmax strategy was modified and improved.
 - The maximum depth in the minmax strategy was setted to 10.
-
-More matches were played with $N = 4$; however, since the computation is slow, the winning ratio was calculated on 10 matches (instead of 100) for each opponent strategy.
-
-The following table shows the new results.
-
-|   N   |     Opponent Strategy      | Winning Ratio |
-| :---: | :------------------------: | :-----------: |
-|   4   |           Random           |      1.0      |
-|   4   |          Evolved           |      1.0      |
-|   4   | Nim Sum (as second player) |      0.0      |
-|   4   | Nim Sum (as first player)  |      0.7      |
-
-Since the nim sum of a full board with $N = 4$ is equal to 0, it's not possible to win against the nim sum strategy as second player.
-
-On the other hand, the winning ratio against the nim sum strategy as first player is quite variable. It is due to the limited maximum depth: the minmax can't always calculate the optimal move, and the resulting ratios were 0.3, 1.0, 0.7, etc...
+- A new set of matches were played to further evaluate all the strategies.
