@@ -2,24 +2,30 @@
 
 ## The genetic choices
 
-<b>Individual: Candidate solution</b><br>
+### Individual: Candidate solution
+
 An individual is a set of used lists. Every list is represented by an unsigned integer, formed by the juxtaposition of 0's (if that number is not in the list) and 1's (if it is in the list). Ex. [0, 2, 3] for N = 5 becomes 01101 = 13.
 
-<b>Population: Set of candidate solutions</b><br>
+### Population: Set of candidate solutions
+
 The population is represented by a list of the processed individuals (represented by the unsigned integers).
 
-<b>Fitness: Ability to solve the problem</b><br>
+### Fitness: Ability to solve the problem
+
 Calculate $(2^N - 1) - (list1 | list2 | ...)$ where <i>'|'</i> is a <i>'bitwise or'</i>.<br>
 Then, count the number of 1's of its binary representation.
 It counts the numbers that are missing in the set covering.
 
-<b>Generations: Sequence of steps</b><br>
+### Generations: Sequence of steps
+
 Random changes, Evaluation, Next generation.
 
-<b>Cross-over</b><br>
+### Cross-over
+
 Given two sets of numbers, take a random part of the first one, and a random part of the second one; if the resulting list is empty discard it, and merge the two initial set removing the duplicates.
 
-<b>Mutation</b><br>
+### Mutation
+
 Given a set of numbers (individual), remove one of them and insert an element from the list of all numbers.
 
 ## Results
