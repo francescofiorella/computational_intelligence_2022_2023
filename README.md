@@ -1,6 +1,6 @@
 # Computational Intelligence 2022/2023
 
-This repository contains my lab solutions for the Computational Intelligence master course of Politecnico di Torino.
+This repo contains my lab solutions for the Computational Intelligence master's course of Politecnico di Torino.
 
 The laboratories topic are:
 1. Set Covering with breath first, depth first and A* algorithms.
