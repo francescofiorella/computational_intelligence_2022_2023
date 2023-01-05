@@ -142,7 +142,7 @@ A gene is formed by a tuple of `(rule, law)`, previously defined in the human-li
 The fitness is obtained by summing the winning ratio of the individual against the random strategy and the best human strategy, using boards with 2, 3, 4, and 5 rows.
 
 #### Cross-over
-Given two individual, merge them by taking a random $num$ of genes of the first one and $NUM\_ROWS - num$ genes of the second one.
+Given two individual, merge them by taking a random $num$ of genes of the first one and `NUM_ROWS - num` genes of the second one.
 
 #### Mutation
 Replace a random gene of the individual with another random gene.
@@ -190,7 +190,7 @@ When it's my turn:
 - Pick the path that maximize my reward.
 - Perform the chosen move.
 
-### The matches
+### The evaluation
 
 Several matches were played to evaluate the minmax strategy:
 - Against the random strategy
@@ -246,7 +246,7 @@ The reinforcement learning algorithm has been trained against:
 - Evolved strategy
 - Nim sum strategy
 
-### The results
+### Results
 
 The learning algorithm has revealed successful; in the end, each opponent has been beaten with a high ratio.<br>
 Data has been collected before and after the training, during two evaluations which showed the great improvement of the agent during the learning phase.<br>
@@ -259,6 +259,11 @@ The order in which players start is meaningful, in fact the reinforcement learni
 |   5   |       Evolved       |       0.08       |        1.0        |
 |   5   |       Nim Sum       |       0.0        |       0.84        |
 
+## The chosen policy
+
+By comparing the four developed agents, the minmax wins against all the others.<br>
+However, its implementation is too slow to be calculated for big N, so the reinforcement learning can be the optimal solution. The only con is that the opponent strategy should be known in advance.
+
 ## Later modifications
 
 After the reviews, I made some little modifications to improve the results:
@@ -266,5 +271,5 @@ After the reviews, I made some little modifications to improve the results:
 - The previous implementation of the evolved strategy was modified and adapted as a tournament, and now it is included in the first task.
 - A new evolved strategy was implemented from scratch.
 - The alpha beta pruning in the minmax strategy was modified and improved.
-- The maximum depth in the minmax strategy was setted to 10.
+- The maximum depth in the minmax strategy was set to 10.
 - A new set of matches were played to further evaluate all the strategies.
