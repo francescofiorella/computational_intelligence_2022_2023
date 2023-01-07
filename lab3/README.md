@@ -263,11 +263,7 @@ The order in which players start is meaningful, in fact the reinforcement learni
 |   5   |     Best human      |       0.16       |        1.0        |
 |   5   |       Evolved       |       0.08       |        1.0        |
 |   5   |       Nim Sum       |       0.0        |       0.84        |
-
-## The chosen policy
-
-By comparing the four developed agents, the minmax wins against all the others.<br>
-However, its implementation is too slow to be calculated for big N, so the reinforcement learning can be the optimal solution. The only con is that the opponent strategy should be known in advance.
+|   5   |       Minmax        |       0.0        |        1.0        |
 
 ## Later modifications
 
