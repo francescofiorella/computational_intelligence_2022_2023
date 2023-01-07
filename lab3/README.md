@@ -200,33 +200,38 @@ Several matches were played to evaluate the minmax strategy:
 
 ### Results
 
-The minmax strategy was able to win against all the previous strategy; however, when playing against the nim sum, it loses if the minmax is not starting with $N \ in \ [2, 3], and it loses when the minmax is starting with $N = 4$.
+The minmax strategy was able to win against all the previous strategy; however, when playing against the nim sum, it loses if the minmax is not starting with $N \ in \ [2, 3, 5], and it loses when the minmax is starting with $N = 4$.
 
-Despite the alpha beta pruning was implemented along with a depth cut, the minmax strategy was too slow to calculate the optimal move for $N > 4$, so all the matches were played with $N \ in \ [2, 3, 4]$. Moreover, since the computation was slow, the number of matches in the evaluation was lowered from 100 to 10 for $N = 4$.
+After adding the cache system, the minmax strategy became very fast, so it was able to play with $N \ in \ [2, 3, 4, 5]$ in a few milliseconds. Moreover, the depth cut was removed and results were far better.
 
-It is not possible to win against the nim sum strategy as first player for $N \ in \ [2, 3]$.
+It is not possible to win against the nim sum strategy as first player for $N \ in \ [2, 3, 5]$.
 
-Considering $N = 4$, since the nim sum of a full board is equal to 0, it's not possible to win against the nim sum strategy as second player. On the other hand, the winning ratio against the nim sum strategy as first player is quite variable. It is due to the limited maximum depth: the minmax can't always calculate the optimal move, and the resulting ratios were 0.3, 1.0, 0.7, etc...
+Considering $N = 4$, since the nim sum of a full board is equal to 0, it's not possible to win against the nim sum strategy as second player. On the other hand, the winning ratio against the nim sum strategy as first player is always 1.0.
 
 The results are reported in the table below:
 
 |   N   |    Opponent's Strategy     | Winning Ratio |
 | :---: | :------------------------: | :-----------: |
-|   2   |           Random           |     0.88      |
+|   2   |           Random           |     0.92      |
 |   3   |           Random           |      1.0      |
 |   4   |           Random           |      1.0      |
+|   5   |           Random           |      1.0      |
 |   2   |         Best human         |      1.0      |
 |   3   |         Best human         |      1.0      |
 |   4   |         Best human         |      1.0      |
-|   2   |          Evolved           |      1.0      |
+|   5   |         Best human         |      1.0      |
+|   2   |          Evolved           |      0.5      |
 |   3   |          Evolved           |      1.0      |
 |   4   |          Evolved           |      1.0      |
+|   5   |          Evolved           |      1.0      |
 |   2   | Nim Sum (as second player) |      1.0      |
 |   3   | Nim Sum (as second player) |      1.0      |
 |   4   | Nim Sum (as second player) |      0.0      |
+|   5   | Nim Sum (as second player) |      1.0      |
 |   2   | Nim Sum (as first player)  |      0.0      |
 |   3   | Nim Sum (as first player)  |      0.0      |
-|   4   | Nim Sum (as first player)  |      0.7      |
+|   4   | Nim Sum (as first player)  |      1.0      |
+|   5   | Nim Sum (as first player)  |      0.0      |
 
 ## An agent using reinforcement learning
 
@@ -271,5 +276,5 @@ After the reviews, I made some little modifications to improve the results:
 - The previous implementation of the evolved strategy was modified and adapted as a tournament, and now it is included in the first task.
 - A new evolved strategy was implemented from scratch.
 - The alpha beta pruning in the minmax strategy was modified and improved.
-- The maximum depth in the minmax strategy was set to 10.
+- A cache system was implemented in minmax that increased a lot the performances.
 - A new set of matches were played to further evaluate all the strategies.

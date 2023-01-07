@@ -2,7 +2,7 @@
 
 This repo contains my lab solutions for the Computational Intelligence master's course of Politecnico di Torino.
 
-The laboratories topic are:
+The lab topics are:
 1. Set Covering with breath first, depth first and A* algorithms.
 2. Set Covering with evolution algorithm.
 3. Policy search for the Nim game: agents using fixed rules, evolved rules, minmax, and reinforcement learning.
