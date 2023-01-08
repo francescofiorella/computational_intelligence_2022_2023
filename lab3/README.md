@@ -250,6 +250,7 @@ The reinforcement learning algorithm has been trained against:
 - Best human-like strategy
 - Evolved strategy
 - Nim sum strategy
+- Minmax strategy
 
 ### Results
 

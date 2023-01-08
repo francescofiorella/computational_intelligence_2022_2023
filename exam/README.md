@@ -18,9 +18,8 @@ Quarto is distinctive in that there is only one set of common pieces, rather tha
 
 The purpose of this project is to develop some agents able to play quarto. Each agent aim to beat with a high winning ratio the random agent, which always takes a random piece, and always places a piece in a random position.
 
-The main project folder contains the original `quarto` library, provided by Andrea Calabrese, along with the `quarto.ipynb` file, that contains the implementation of the hardcoded strategies and the main genetic algorithm.<br>
-The file `ga_2.ipynb` contains a previous (less successful) implementation of the GA.<br>
-The `minmax_rl` folder contains a modified version of the library (`quarto_edited`) which eliminates all the loops in the game by memorizing the remaining pieces and the remaining available coordinates in the board. Also, the `minmax_rl.ipynb` file contains an implementation of the minmax strategy, and two version of a reiforcement learning strategy.
+The main project folder contains the original `quarto` library, provided by Andrea Calabrese, along with the `quarto.ipynb` file, that contains the implementation of the genetic algorithm, the hardcoded, minmax, and reinforcement learning strategies.<br>
+The file `ga_2.ipynb` contains a previous (less successful) implementation of the GA.
 
 ## An agent using fixed rules
 
@@ -215,3 +214,57 @@ The algorithm was slow, the fitness inaccurate, and the final results not good..
 You can find the implementation at the end of `ga_2.ipynb` file, in which you can find a table with the results too.
 
 ## An agent using minmax
+
+Minmax is a simple algorithm that simulates all the possible moves and choose the best one.
+
+The function can be called in four modes:
+- Mode 0: the 1st player is placing a piece
+- Mode 1: the 1st player is choosing a piece
+- Mode 2: the 2nd player is placing a piece
+- Mode 3: the 2bd player is choosing a piece
+
+The 1st player is trying to minimize the reward, while the 2nd player s trying to maximize it.
+
+The alpha-beta pruning strategy has been implemented along with a cache system, in order to decrease the number of calculations.
+
+### The Minmax Agent
+
+It uses exclusively the minmax strategy to compute the next move; the maximum depth is customizable.
+
+### The Random-Minmax Agent
+
+It performs random moves util 4 pieces are placed on the board, then uses minmax to calculate the next moves.<br>
+In this way it's much faster and the maximum depth can be increased (it is customizable).
+
+#### The evaluation
+
+The agents are evaluated by setting up some matches against the random agent, the hardcoded agent with the best strategies from the tournament (most different piece, fill coordinates), and the evolved agent. At the end, the minmax agent was evaluated against the random-minmax agent.
+
+## Results
+
+The minmax strategy is very effective, it has high winning ratio against all the previous strategies. However, it is the slower strategy and a maximum depth must be implemented, adding the possibility to perform some bad moves.<br>
+This is the reason why it still loses some games and it has a winning ratio of 0.0 against the hardcoded strategy (for a maximum depth less then 15): the results can be improved by incrementing the maximum depth.<br>
+As a matter of fact, the random-minmax wins against the pure minmax becaouse of its higher maximum depth.<br>
+Note that, with a powerful pc, the minmax will always win against the random-minmax.
+
+The evaluation results are reported in the table below:
+
+|  First agent  | Second Agent | Max depth | Winning ratio |
+| :-----------: | :----------: | :-------: | :-----------: |
+|    Minmax     |    Random    |    10     |      0.9      |
+|    Minmax     |    Random    |    11     |      0.9      |
+|    Minmax     |  Hardcoded   |    10     |      0.0      |
+|    Minmax     |  Hardcoded   |    11     |      0.0      |
+|    Minmax     |  Hardcoded   |    12     |      0.0      |
+|    Minmax     |  Hardcoded   |    13     |      0.0      |
+|    Minmax     |  Hardcoded   |    14     |      0.0      |
+|    Minmax     |  Hardcoded   |    15     |      1.0      |
+|    Minmax     |   Evolved    |    10     |      1.0      |
+|    Minmax     |   Evolved    |    11     |      1.0      |
+| Random-Minmax |    Random    |    12     |      1.0      |
+| Random-Minmax |  Hardcoded   |    12     |      0.7      |
+| Random-Minmax |   Evolved    |    12     |      0.8      |
+| Random-Minmax |    Minmax    |  12 - 10  |      0.7      |
+| Random-Minmax |    Minmax    |  12 - 11  |      0.6      |
+
+## An agent using reinforcement learning
