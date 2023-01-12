@@ -8,4 +8,4 @@ The explored topics are:
 3. Policy search for the Nim game: agents using fixed rules, evolved rules, minmax, and reinforcement learning.
 4. Quarto: agents using fixed rules, evolved rules, minmax, and reinforcement learning.
 
-Credits to prof. Giovanni Squillero, and his [course repository](https://github.com/squillero/computational-intelligence).
+Credits to prof. Giovanni Squillero, Andrea Calabrese, and the [course repository](https://github.com/squillero/computational-intelligence).

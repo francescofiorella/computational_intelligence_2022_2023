@@ -19,7 +19,7 @@ Quarto is distinctive in that there is only one set of common pieces, rather tha
 The purpose of this project is to develop some agents able to play quarto. Each agent aim to beat with a high winning ratio the random agent, which always takes a random piece, and always places a piece in a random position.
 
 The main project folder contains the original `quarto` library, provided by Andrea Calabrese, along with the `quarto.ipynb` file, that contains the implementation of the genetic algorithm, the hardcoded, minmax, and reinforcement learning strategies.<br>
-The file `ga_2.ipynb` contains a previous (less successful) implementation of the GA.
+The file `quarto_failures.ipynb` contains a previous (less successful) implementation of the GA.
 
 ## An agent using fixed rules
 
@@ -211,7 +211,7 @@ Replace a random probability of the individual with another random probability, 
 
 The algorithm was slow, the fitness inaccurate, and the final results not good...
 
-You can find the implementation at the end of `ga_2.ipynb` file, in which you can find a table with the results too.
+You can find the implementation in `quarto_failures.ipynb` file, in which you can find a table with the results too.
 
 ## An agent using minmax
 
