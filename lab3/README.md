@@ -200,7 +200,7 @@ Several matches were played to evaluate the minmax strategy:
 
 ### Results
 
-The minmax strategy was able to win against all the previous strategy; however, when playing against the nim sum, it loses if the minmax is not starting with $N \ in \ [2, 3, 5], and it loses when the minmax is starting with $N = 4$.
+The minmax strategy was able to win against all the previous strategy; however, when playing against the nim sum, it loses if the minmax is not starting with $N \ in \ [2, 3, 5]$, and it loses when the minmax is starting with $N = 4$.
 
 After adding the cache system, the minmax strategy became very fast, so it was able to play with $N \ in \ [2, 3, 4, 5]$ in a few milliseconds. Moreover, the depth cut was removed and results were far better.
 
