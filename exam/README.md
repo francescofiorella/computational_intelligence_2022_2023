@@ -19,7 +19,7 @@ Quarto is distinctive in that there is only one set of common pieces, rather tha
 The purpose of this project is to develop some agents able to play quarto. Each agent aim to beat with a high winning ratio the random agent, which always takes a random piece, and always places a piece in a random position.
 
 The main project folder contains the original `quarto` library, provided by Andrea Calabrese, along with the `quarto.ipynb` file, that contains the implementation of the genetic algorithm, the hardcoded, minmax, and reinforcement learning strategies.<br>
-The file `quarto_failures.ipynb` contains a previous (less successful) implementation of the GA.
+The file `quarto_failures.ipynb` contains a previous (unsuccessful) implementation of the GA.
 
 ## An agent using fixed rules
 
@@ -138,7 +138,7 @@ The agent takes as argument an individual, and uses it to decide what strategy t
 
 ### Cross-over
 
-Given two individual, merge them by taking a random $num$ of numbers of the first one and $NUM\_ROWS - num$ numbers of the second one, twice (for both the lists in the individuals).
+Given two individual, merge them by taking a random $num$ of numbers of the first one and $x - num$ numbers of the second one, twice (for both the lists in the individuals).
 
 ### Mutation
 
@@ -204,7 +204,7 @@ Each number represents the probability that a certain strategy will be chosen.<b
 Note that we defined four choosing strategies and eleven placing strategies.
 
 Cross-over:<br>
-Given two individual, merge them by taking a random $num$ of propabilities of the first one and $NUM\_ROWS - num$ probabilities of the second one, twice (for both the lists in the individuals).
+Given two individual, merge them by taking a random $num$ of propabilities of the first one and $x - num$ probabilities of the second one, twice (for both the lists in the individuals).
 
 Mutation:<br>
 Replace a random probability of the individual with another random probability, twice (for both the lists of the individuals).
@@ -223,7 +223,7 @@ The function can be called in four modes:
 - Mode 2: the 2nd player is placing a piece
 - Mode 3: the 2bd player is choosing a piece
 
-The 1st player is trying to minimize the reward, while the 2nd player s trying to maximize it.
+The 1st player is trying to maximize the reward, while the 2nd player is trying to minimize it.
 
 The alpha-beta pruning strategy has been implemented along with a cache system, in order to decrease the number of calculations.
 
@@ -240,7 +240,7 @@ In this way it's much faster and the maximum depth can be increased (it is custo
 
 The agents are evaluated by setting up some matches against the random agent, the hardcoded agent with the best strategies from the tournament (most different piece, fill coordinates), and the evolved agent. At the end, the minmax agent was evaluated against the random-minmax agent.
 
-## Results
+### Results
 
 The minmax strategy is very effective, it has high winning ratio against all the previous strategies. However, it is the slower strategy and a maximum depth must be implemented, adding the possibility to perform some bad moves.<br>
 This is the reason why it still loses some games and it has a winning ratio of 0.0 against the hardcoded strategy (for a maximum depth less then 15): the results can be improved by incrementing the maximum depth.<br>
@@ -274,6 +274,8 @@ Quarto was solved both with a G-learning and a Q-learning approach; however, the
 ### The state
 
 The `get_state(...)` function is an attempt to decrease the amounth of data needed to train the agent. It tries to generalize the quarto board by dividing it in four squares and sorting them. In this way, two board with the same pieces placed in different (but equivalent) positions have the same state.
+
+The `coord_to_index(...)` function converts a specific pair of coordinates into a "general" one, that can be used on the "sorted" board, given the index used to sort that board; while `index_to_coord(...)` converts back the "general" coordinates into the specific ones.
 
 ### Pickle
 
@@ -322,7 +324,7 @@ In both the G-learning and Q-learning implementations, the learning phase is cha
 
 ### Results
 
-Both the G-Agent and the Q-Agent were evaluated against the random agent, and the results are reported in the following table, that reports two evaluations (two win ratio), one before the learning phase and one after it.
+Both the G-Agent and the Q-Agent were evaluated against the random agent, and the results are reported in the following table, that reports two evaluations (win ratios), one before the learning phase and one after it.
 
 | RL Approach | First Evaluation | Second evaluation |
 | :---------: | :--------------: | :---------------: |
@@ -333,9 +335,7 @@ The agents did not learn after 10000 matches and the time and data needed to per
 
 Particularly, the G-learning approach is slower than the other one, as the state table doesn't stop to grow and the performances slow down a lot.
 
-Below, are reported some data about 23000 matches that show how the G-tables don't stop growing, the time needed for the computation increases, and the win ratio remains stable to 0.5.
-
-#### G length
+Below, is reported some data about 23000 matches that shows how the G-tables don't stop growing, the time needed for the computation increases, and the win ratio remains stable to 0.5.
 
 | Train n° | G_place | G_choose |  Time  | Win ratio |
 | :------: | :-----: | :------: | :----: | :-------: |
