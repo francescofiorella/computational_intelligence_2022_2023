@@ -268,3 +268,107 @@ The evaluation results are reported in the table below:
 | Random-Minmax |    Minmax    |  12 - 11  |      0.6      |
 
 ## An agent using reinforcement learning
+
+Quarto was solved both with a G-learning and a Q-learning approach; however, these to agents weren't so effective as solving quarto game with reinforcement learning would require a lot of data, computational power and time to train.
+
+### The state
+
+The `get_state(...)` function is an attempt to decrease the amounth of data needed to train the agent. It tries to generalize the quarto board by dividing it in four squares and sorting them. In this way, two board with the same pieces placed in different (but equivalent) positions have the same state.
+
+### Pickle
+
+The `Pickle` library is another attempt to improve the algorithm. It has been used to store the learning dictionaries after a fixed number of matches and later loading them, in order to resume the learning phase in an intermediate state.<br>
+However, the library has not been used in the later stages of the agent development as it requires a lot of time to write and read large data from disk.
+
+### G-Table Approach
+
+The G-table is a dictionary with entries representing states of the environment. Each cell in the table contains a value that represents the estimated long-term reward that the agent can expect to receive starting from that state.
+
+The agent starts with a random or arbitrary G-table and then updates the values in the table based on its experiences. The agent updates the value for the current state using the following update rule:
+
+$G(s) = G(s) + α(r + γ*G(s'))$
+
+where s is the current state, r is the reward received, s' is the next state, α is the learning rate, and γ is the discount factor.
+
+This process continues for many episodes, allowing the agent to learn the optimal policy for the environment over time. The G-table provides the agent with a way to represent the learned knowledge, so the agent can use this knowledge to make decisions in the future.
+
+In this implementation, the agent generates two G-table, one for the placing phase, and one for the choosing phase.
+
+#### The reward
+
+The agent gets a reward of -2 if the opponent win, 1 if I win, -1 if it's a draw, 0 otherwise.
+
+### Q-Table Approach
+
+A Q-table is a dictionary with entries composed by a tuple of two values: the first one represents the states of the environment and the second one represents the actions that the agent can take. Each cell in the table contains a value that represents the estimated long-term reward that the agent can expect to receive by taking a particular action in a particular state.
+
+The agent starts with a random or arbitrary Q-table, and then updates the values in the table based on its experiences. At each step, the agent selects the action with the highest value in the Q-table for the current state, and then receives a reward or penalty based on the action it took. The agent then updates the value for that state-action pair using the following update rule:
+
+$Q(s, a) = Q(s, a) + α(r + γ*max Q(s', a') - Q(s, a))$
+
+where s is the current state, a is the action taken, r is the reward received, s' is the next state, a' is the action taken in next state, α is the learning rate, and γ is the discount factor.
+
+This process continues for many episodes, allowing the agent to learn the optimal policy for the environment over time. The Q-table provides the agent with a way to represent the learned knowledge, so the agent can use this knowledge to make decisions in the future.
+
+In this implementation, the agent generates two Q-table, one for the placing phase, and one for the choosing phase.
+
+#### The reward
+
+During the placing phase the agent gets a reward of 1 if the game ends, 0 otherwise; meanwhile, during the choosing phase, all the possible next moves of the opponent are calculated, and the agent gets a reward of -1 for each move that leads to a lost game, 0 otherwise.
+
+### The learning phase
+
+In both the G-learning and Q-learning implementations, the learning phase is characterized by 10000 matches played by the agent against the random strategy; however, this number of matches is too low to obtain a well-trained agent.
+
+### Results
+
+Both the G-Agent and the Q-Agent were evaluated against the random agent, and the results are reported in the following table, that reports two evaluations (two win ratio), one before the learning phase and one after it.
+
+| RL Approach | First Evaluation | Second evaluation |
+| :---------: | :--------------: | :---------------: |
+|   G-Table   |      0.499       |       0.523       |
+|   Q-Table   |      0.478       |       0.506       |
+
+The agents did not learn after 10000 matches and the time and data needed to perform more training is too large.
+
+Particularly, the G-learning approach is slower than the other one, as the state table doesn't stop to grow and the performances slow down a lot.
+
+Below, are reported some data about 23000 matches that show how the G-tables don't stop growing, the time needed for the computation increases, and the win ratio remains stable to 0.5.
+
+#### G length
+
+| Train n° | G_place | G_choose |  Time  | Win ratio |
+| :------: | :-----: | :------: | :----: | :-------: |
+|    0     |    0    |    0     |   -    |     -     |
+|    1     |  50951  |  480879  |  13s   |   0.46    |
+|    2     |  99623  |  946438  |  13s   |   0.49    |
+|    3     | 145333  | 1384110  |  16s   |   0.49    |
+|    4     | 189238  | 1804848  |  15s   |   0.47    |
+|    5     | 232551  | 2213670  |  14s   |   0.43    |
+|    6     | 274858  | 2604325  |  14s   |   0.52    |
+|    7     | 316579  | 2988546  |  15s   |   0.40    |
+|    8     | 358542  | 3370745  |  16s   |   0.44    |
+|    9     | 400620  | 3748392  |  17s   |   0.53    |
+|    10    | 441668  | 4116272  |  24s   |   0.56    |
+|    11    | 482988  | 4480636  |  24s   |   0.52    |
+|    12    | 524043  | 4844538  |  21s   |   0.49    |
+|    13    | 565350  | 5209891  |  36s   |   0.44    |
+|    14    | 606903  | 5566562  |  41s   |   0.55    |
+|    15    | 648557  | 5916521  |  57s   |   0.48    |
+|    16    | 689831  | 6264341  | 2m 32s |   0.49    |
+|    17    | 731141  | 6617331  | 1m 25s |   0.51    |
+|    18    | 772615  | 6963659  | 2m 1s  |   0.52    |
+|    19    | 814104  | 7314337  | 3m 31s |   0.52    |
+|    20    | 855315  | 7662992  | 2m 29s |   0.53    |
+|    21    | 896494  | 8014891  | 3m 17s |   0.48    |
+|    22    | 937698  | 8361264  | 3m 50s |   0.52    |
+|    23    | 983032  | 8746893  | 9m 26s |   0.55    |
+
+N.B. Each train runs 1000 matches.
+
+## The chosen policy
+
+So far, the best policies are the Evolved one and the Minmax. The first one is a valid compromise between performance and effectiveness, while the second one has potentially the best effectiveness, although it has poor performances with a high maximum depth.
+
+So, if we need to play Quarto without any delay, the `EvolvedPlayer` is the best option; while, without any time limit the `MinmaxPlayer` with no maximum depth limit represent the perfect choice.<br>
+If a medium delay is acceptable, the `MinmaxPlayer` with a maximum depth of 15 is the best option: it takes 5m 25s (on my pc) to complete the first match against the random agent, and 1m 54s from the second one (as it stores most of the states in the cache).
