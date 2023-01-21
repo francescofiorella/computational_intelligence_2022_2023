@@ -266,6 +266,11 @@ The order in which players start is meaningful, in fact the reinforcement learni
 |   5   |       Nim Sum       |       0.0        |       0.84        |
 |   5   |       Minmax        |       0.0        |        1.0        |
 
+## The chosen policy
+
+So far, the best policies are the Minmax and the Reinforcement Learning. The first one has the best performances (after the implementation of the cache system) and has an extremely high win ratio against the random, best human, evolved, and nim sum strategies.<br>
+If we have enough time to train the agent, the RL strategy is the best option, as it is able to win against all the strategies, minmax included.
+
 ## Later modifications
 
 After the reviews, I made some little modifications to improve the results:

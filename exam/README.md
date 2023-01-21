@@ -371,4 +371,4 @@ N.B. Each train runs 1000 matches.
 So far, the best policies are the Evolved one and the Minmax. The first one is a valid compromise between performance and effectiveness, while the second one has potentially the best effectiveness, although it has poor performances with a high maximum depth.
 
 So, if we need to play Quarto without any delay, the `EvolvedPlayer` is the best option; while, without any time limit the `MinmaxPlayer` with no maximum depth limit represent the perfect choice.<br>
-If a medium delay is acceptable, the `MinmaxPlayer` with a maximum depth of 15 is the best option: it takes 5m 25s (on my pc) to complete the first match against the random agent, and 1m 54s from the second one (as it stores most of the states in the cache).
+If a medium delay is acceptable, the `MinmaxPlayer` with a maximum depth of 15 is the best option: it takes 5m 25s (on my pc) to complete the first match against the random agent, and 1m 54s for the second one (as it stores most of the states in the cache).
