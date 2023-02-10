@@ -372,3 +372,5 @@ So far, the best policies are the Evolved one and the Minmax. The first one is a
 
 So, if we need to play Quarto without any delay, the `EvolvedPlayer` is the best option; while, without any time limit the `MinmaxPlayer` with no maximum depth represents the perfect choice.<br>
 If a medium delay is acceptable, the `MinmaxPlayer` with a maximum depth of 15 is the best option: it takes 5m 25s (on my pc) to complete the first match against the random agent, and 1m 54s for the second one (as it stores most of the states in the cache).
+
+In the end, the chosen policy for the exam is the `MinmaxPlayer` with a maximum depth of 11.
